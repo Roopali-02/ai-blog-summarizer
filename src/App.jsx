@@ -11,7 +11,7 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [history, setHistory] = useState([]);
   const [error, setError] = useState("");
-  const API_URL ="https://cors-anywhere.herokuapp.com/https://router.huggingface.co/hf-inference/models/facebook/bart-large-cnn";
+  const API_URL ="/api/summarize.js";
   const API_TOKEN = import.meta.env.VITE_HF_API_KEY;
 
    useEffect(() => {
