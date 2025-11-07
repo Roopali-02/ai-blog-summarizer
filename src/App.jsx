@@ -36,10 +36,10 @@ function App() {
 
     try {
       const res = await summarizeText(text);
-      const finalSummary = res[0]?.summary_text || "No summary returned.";
+      const finalSummary = res.summary || "No summary returned.";
       setSummary(finalSummary);
 
-     const newItem = { text, summary: finalSummary, time: Date.now() };
+    const newItem = { text, summary: finalSummary, time: Date.now() };
 setHistory((prev) => {
   const updated = [newItem, ...prev].slice(0, 6);
   localStorage.setItem("summaryHistory", JSON.stringify(updated));
