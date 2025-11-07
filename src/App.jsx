@@ -11,45 +11,21 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [history, setHistory] = useState([]);
   const [error, setError] = useState("");
-  const API_URL = "/api/summarize";
-  const API_TOKEN = import.meta.env.VITE_HF_API_KEY;
 
    useEffect(() => {
     const saved = localStorage.getItem("summaryHistory");
     if (saved) setHistory(JSON.parse(saved));
   }, []);
 
-  // Save to localStorage whenever history changes
   useEffect(() => {
      if (history.length > 0) {
-    // ensure data isn’t empty before saving
     localStorage.setItem("summaryHistory", JSON.stringify(history));
   }
   }, [history]);
 
 
   const summarizeText = async (text) => {
-
-    const response = await axios.post(
-      API_URL,
-       {
-      inputs: text,
-      parameters: {
-        max_length: 120,
-        min_length: 30,
-        do_sample: false,
-      },
-      options: { wait_for_model: true },
-     },
-      {
-        headers: {
-          Authorization: `Bearer ${API_TOKEN}`,
-          "Content-Type": "application/json",
-          "x-requested-with": "XMLHttpRequest",
-        },
-      }
-    );
-
+    const response = await axios.post("/api/summarize", { text });
     return response.data;
   };
 
@@ -63,7 +39,6 @@ function App() {
       const finalSummary = res[0]?.summary_text || "No summary returned.";
       setSummary(finalSummary);
 
-      // ✅ Save to history
      const newItem = { text, summary: finalSummary, time: Date.now() };
 setHistory((prev) => {
   const updated = [newItem, ...prev].slice(0, 6);
