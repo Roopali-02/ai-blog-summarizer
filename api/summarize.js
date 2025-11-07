@@ -6,7 +6,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    const API_URL = "https://api-inference.huggingface.co/models/facebook/bart-large-cnn";
+    const API_URL = "https://router.huggingface.co/hf-inference/models/facebook/bart-large-cnn";
     const API_TOKEN = process.env.HF_API_KEY;
 
     const response = await axios.post(
