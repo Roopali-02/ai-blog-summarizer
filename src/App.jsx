@@ -11,7 +11,7 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [history, setHistory] = useState([]);
   const [error, setError] = useState("");
-  const API_URL = "https://api.allorigins.win/raw?url=https://api-inference.huggingface.co/models/facebook/bart-large-cnn";
+  const API_URL = "/api/summarize";
   const API_TOKEN = import.meta.env.VITE_HF_API_KEY;
 
    useEffect(() => {
